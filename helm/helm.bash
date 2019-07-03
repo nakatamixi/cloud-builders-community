@@ -54,6 +54,12 @@ if [[ -n $HELMFILE_VERSION ]]; then
   chmod 700 helmfile
 fi
 
+# if SECRETS_PLUGIN_VERSION is set, install the plugin
+if [[ -n $SECRETS_PLUGIN_VERSION ]]; then
+  echo "Installing helm-secrets plugin version $SECRETS_PLUGIN_VERSION "
+  helm plugin install https://github.com/futuresimple/helm-secrets --version $SECRETS_PLUGIN_VERSION
+fi
+
 # check if repo values provided then add that repo
 if [[ -n $HELM_REPO_NAME && -n $HELM_REPO_URL ]]; then
   echo "Adding chart helm repo $HELM_REPO_URL "
